@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BIITSOCAILModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="parent">
+          <Key>
+            <PropertyRef Name="par_id" />
+          </Key>
+          <Property Name="par_id" Type="int" Nullable="false" />
+          <Property Name="use_id" Type="int" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="stu_id" />
+          </Key>
+          <Property Name="stu_id" Type="int" Nullable="false" />
+          <Property Name="use_id" Type="int" />
+          <Property Name="regNo" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="tea_id" />
+          </Key>
+          <Property Name="tea_id" Type="int" Nullable="false" />
+          <Property Name="use_id" Type="int" />
+          <Property Name="empNo" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="use_id" />
+          </Key>
+          <Property Name="use_id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="150" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="150" />
+          <Property Name="gender" Type="char" MaxLength="1" />
+          <Property Name="phoneNo" Type="nvarchar" MaxLength="150" />
+          <Property Name="createdOn" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__parent__use_id__4E88ABD4">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="parent" Type="Self.parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="use_id" />
+            </Principal>
+            <Dependent Role="parent">
+              <PropertyRef Name="use_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__use_id__4BAC3F29">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="use_id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="use_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacher__use_id__5165187F">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="use_id" />
+            </Principal>
+            <Dependent Role="teacher">
+              <PropertyRef Name="use_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BIITSOCAILModelStoreContainer">
+          <EntitySet Name="parent" EntityType="Self.parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="student" EntityType="Self.student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__parent__use_id__4E88ABD4" Association="Self.FK__parent__use_id__4E88ABD4">
+            <End Role="user" EntitySet="user" />
+            <End Role="parent" EntitySet="parent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__use_id__4BAC3F29" Association="Self.FK__student__use_id__4BAC3F29">
+            <End Role="user" EntitySet="user" />
+            <End Role="student" EntitySet="student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher__use_id__5165187F" Association="Self.FK__teacher__use_id__5165187F">
+            <End Role="user" EntitySet="user" />
+            <End Role="teacher" EntitySet="teacher" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BIITSOCAILModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="parent">
+          <Key>
+            <PropertyRef Name="par_id" />
+          </Key>
+          <Property Name="par_id" Type="Int32" Nullable="false" />
+          <Property Name="use_id" Type="Int32" />
+          <Property Name="CNIC" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="user" Relationship="Self.FK__parent__use_id__4E88ABD4" FromRole="parent" ToRole="user" />
+        </EntityType>
+        <EntityType Name="student">
+          <Key>
+            <PropertyRef Name="stu_id" />
+          </Key>
+          <Property Name="stu_id" Type="Int32" Nullable="false" />
+          <Property Name="use_id" Type="Int32" />
+          <Property Name="regNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="user" Relationship="Self.FK__student__use_id__4BAC3F29" FromRole="student" ToRole="user" />
+        </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="tea_id" />
+          </Key>
+          <Property Name="tea_id" Type="Int32" Nullable="false" />
+          <Property Name="use_id" Type="Int32" />
+          <Property Name="empNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="user" Relationship="Self.FK__teacher__use_id__5165187F" FromRole="teacher" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="use_id" />
+          </Key>
+          <Property Name="use_id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="phoneNo" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="parents" Relationship="Self.FK__parent__use_id__4E88ABD4" FromRole="user" ToRole="parent" />
+          <NavigationProperty Name="students" Relationship="Self.FK__student__use_id__4BAC3F29" FromRole="user" ToRole="student" />
+          <NavigationProperty Name="teachers" Relationship="Self.FK__teacher__use_id__5165187F" FromRole="user" ToRole="teacher" />
+        </EntityType>
+        <Association Name="FK__parent__use_id__4E88ABD4">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="parent" Type="Self.parent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="use_id" />
+            </Principal>
+            <Dependent Role="parent">
+              <PropertyRef Name="use_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__student__use_id__4BAC3F29">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="student" Type="Self.student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="use_id" />
+            </Principal>
+            <Dependent Role="student">
+              <PropertyRef Name="use_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teacher__use_id__5165187F">
+          <End Role="user" Type="Self.user" Multiplicity="0..1" />
+          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="use_id" />
+            </Principal>
+            <Dependent Role="teacher">
+              <PropertyRef Name="use_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BIITSOCAILEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="parents" EntityType="Self.parent" />
+          <EntitySet Name="students" EntityType="Self.student" />
+          <EntitySet Name="teachers" EntityType="Self.teacher" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <AssociationSet Name="FK__parent__use_id__4E88ABD4" Association="Self.FK__parent__use_id__4E88ABD4">
+            <End Role="user" EntitySet="users" />
+            <End Role="parent" EntitySet="parents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__student__use_id__4BAC3F29" Association="Self.FK__student__use_id__4BAC3F29">
+            <End Role="user" EntitySet="users" />
+            <End Role="student" EntitySet="students" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher__use_id__5165187F" Association="Self.FK__teacher__use_id__5165187F">
+            <End Role="user" EntitySet="users" />
+            <End Role="teacher" EntitySet="teachers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BIITSOCAILModelStoreContainer" CdmEntityContainer="BIITSOCAILEntities">
+          <EntitySetMapping Name="parents">
+            <EntityTypeMapping TypeName="BIITSOCAILModel.parent">
+              <MappingFragment StoreEntitySet="parent">
+                <ScalarProperty Name="par_id" ColumnName="par_id" />
+                <ScalarProperty Name="use_id" ColumnName="use_id" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="students">
+            <EntityTypeMapping TypeName="BIITSOCAILModel.student">
+              <MappingFragment StoreEntitySet="student">
+                <ScalarProperty Name="stu_id" ColumnName="stu_id" />
+                <ScalarProperty Name="use_id" ColumnName="use_id" />
+                <ScalarProperty Name="regNo" ColumnName="regNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teachers">
+            <EntityTypeMapping TypeName="BIITSOCAILModel.teacher">
+              <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="tea_id" ColumnName="tea_id" />
+                <ScalarProperty Name="use_id" ColumnName="use_id" />
+                <ScalarProperty Name="empNo" ColumnName="empNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="BIITSOCAILModel.user">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="use_id" ColumnName="use_id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="phoneNo" ColumnName="phoneNo" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
